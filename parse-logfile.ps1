@@ -341,12 +341,12 @@ if(!$filenotfound){
         [string]$body += "Date Selected: $startDateDisplay" + "`r`n`r`n"
     }
     
-    if($startdate -ne $enddate){
+    if($startday -ne $endday){
         [string]$body += "Date Range Selected: $StartDateDisplay"  +  " through " + "$EndDateDisplay" + "`r`n`r`n"
     }
   
     if($briefoutput -eq $true){
-        $body = "On $StartDateDisplay" + (&{If(($EndDatedisplay -eq "") -or($startdate -eq $enddate)) {("")} Else {"$EndDateDisplayforbriefBody"}}) + 
+        $body = "On $StartDateDisplay" + (&{If(($EndDatedisplay -eq "") -or($startday -eq $endday)) {("")} Else {"$EndDateDisplayforbriefBody"}}) + 
              ", there were" +
              " $(($selectedlines).count) $briefLinesCounted logged" + 
              ", across $uniquecount unique $briefElementDescription" +
