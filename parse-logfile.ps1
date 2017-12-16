@@ -81,9 +81,8 @@ function Parse-LogFile{
     
    
    Displaying full log output from 365 days ago through today. Remove -testing switch to send results via email
+   Parse-LogFile -startday 700 -endday 0  -smtpserver smtp.gmail.com -username user@gmail.com -password "password" -recipient recipient@gmail.com -sender user@gmail.com -subject "Log file for Server" -logpath "C:\Users\Administrator\Downloads\12-10-library" -logname "server*.log" -fieldtofind "authorized by no authentication" -delimiter ' ' -element 9 -substrstart 6 -substrend 17 -briefLinesCounted "sessions" -briefElementDescription "devices"  -testing $true  -log_title_to_display "Connected Devices Report" -display_current_datetime $true -fulloutput $true -log_to_select_by_date 0 -display_all_messages $true -display_unique_count $true -display_unique_lines $true -display_total_count $true -display_first_and_last_entry $true -date_element_in_entry_array 0 -date_begin_substring_of_element 1 -date_end_substring_of_element 10
    
-   
-   Displaying brief log output from 365 days ago through today. Remove -testing switch to send results via email
 
 
     #>
