@@ -241,9 +241,9 @@ foreach ($line in $logfile){
         $Date = $line.split(" ")
         
         $DateInLogPosition = $date[$($date_element_in_entry_array)]
-        $DateInLogPosition
+        
         $DateinLogSubstring = $DateInLogPosition.Substring($($date_begin_substring_of_element),$($date_end_substring_of_element))
-        $DateinLogSubstring
+        
         $dateinlog = [datetime]$DateinLogSubstring
         $StartDate = ($(get-date).date.adddays(-$StartDay))
        
