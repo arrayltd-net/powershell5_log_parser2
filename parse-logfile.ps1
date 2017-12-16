@@ -22,32 +22,27 @@ Function BuildHash($hash, $date, $item){
 
 
 function Get-CountUniqueValuesInLogEntries([array]$file, [string]$delimiter, [int]$element, [int]$SubstrStart, [int]$SubstrEnd){
-      
-       $LogArray =@()
-       $LogArrayFullLines = @()
-       if($substrend -eq "-1"){
-            $substrend = $tokenize[$element].length
-            
-       }   
-              
-        foreach ($f in $file){
+      if($TestUniqueness -eq $true){
+           $LogArray =@()
+           $LogArrayFullLines = @()
+                     
+            foreach ($f in $file){
            
-           $tokenize = $f.split($delimiter)
+               $tokenize = $f.split($delimiter)
           
-          
-        $linecheck =  $tokenize[$element].substring($substrstart, $substrend)
-     
-        
-        #put the mac in the array $logarray if it doesn't already exist
-        if ($logarray -notcontains $linecheck){
-            $logarray += $linecheck
-            $LogArrayFullLines += $f   
+            $linecheck =  $tokenize[$element].substring($substrstart, $substrend)
+      
+            #put the mac in the array $logarray if it doesn't already exist
+            if ($logarray -notcontains $linecheck){
+                $logarray += $linecheck
+                $LogArrayFullLines += $f   
           
           
             
-        }
+            }
       
         }
+}
    return  $logarrayfulllines
       
    
@@ -68,58 +63,8 @@ function Parse-LogFile{
     
 ##################################################################
 Displaying full log output from 365 days ago through today. Remove -testing switch to send results via email
-Parse-LogFile -startday 365 -endday 0  -smtpserver smtp.gmail.com -username user@gmail.com -password "password" -recipient recipient@gmail.com -sender user@gmail.com -subject "Log file for Server" -logpath "C:\Users\Administrator\Downloads\12-10-library" -logname "server*.log" -fieldtofind "authorized by no authentication" -delimiter ' ' -element 9 -substrstart 6 -substrend 17 -briefLinesCounted "sessions" -briefElementDescription "devices"  -testing $true  -log_title_to_display "Connected Devices Report" -display_current_datetime $true -log_to_select_by_date 0 -display_all_messages $true -display_unique_count $true -display_unique_lines $true -display_total_count $true -display_first_and_last_entry $true -date_element_in_entry_array 0 -date_begin_substring_of_element 1 -date_end_substring_of_element 10 -fulloutput $true
-OUTPUT: 
-Connected Devices Report
+Parse-LogFile -startday 365 -endday 0  -smtpserver smtp.gmail.com -username user@gmail.com -password "password" -recipient recipient@gmail.com -sender user@gmail.com -subject "Log file for Server" -logpath "C:\Users\Administrator\Downloads\12-10-library" -logname "server*.log" -fieldtofind "authorized by no authentication" -delimiter ' ' -briefLinesCounted "sessions" -briefElementDescription "devices"  -testing $true  -log_title_to_display "Connected Devices Report" -display_current_datetime $true -log_to_select_by_date 0 -display_all_messages $true -display_unique_count $true -display_unique_lines $true -display_total_count $true -display_first_and_last_entry $true -date_element_in_entry_array 0 -date_begin_substring_of_element 1 -date_end_substring_of_element 10 -TestUniqueness $true -element 9 -substrstart 6 -substrend 17 -briefexpandedoutput $true 
 
-Current Date: 12/16/2017 12:59:23
-
-Date Range Selected: 12/16/2016 through 12/16/2017
-
-Log file: C:\Users\Administrator\Downloads\12-10-library\server33445 - Copy.log
-
-Total number of filtered entries from log / total entries in log : 5 / 8
-
-Total number of unique filtered entries from log: 2
-
-Most recent Log entry: [2016-12-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:00] is authorized by no authentication
-Oldest Log entry:      [2017-11-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:01] is authorized by no authentication
-
-Unique Messages:
-
-[2016-12-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:00] is authorized by no authentication
-[2017-11-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:01] is authorized by no authentication
-
-All Log Messages:
-
-[2016-12-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:00] is authorized by no authentication
-[2017-11-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:00] is authorized by no authentication
-[2017-11-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:00] is authorized by no authentication
-[2017-11-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:00] is authorized by no authentication
-[2017-11-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:01] is authorized by no authentication
-
-##################################################################
-
-Displaying brief log output from 365 days ago through today. Remove -testing switch to send results via email
-Parse-LogFile -startday 365 -endday 0  -smtpserver smtp.gmail.com -username user@gmail.com -password "password" -recipient recipient@gmail.com -sender user@gmail.com -subject "Log file for Server" -logpath "C:\Users\Administrator\Downloads\12-10-library" -logname "server*.log" -fieldtofind "authorized by no authentication" -delimiter ' ' -element 9 -substrstart 6 -substrend 17 -briefLinesCounted "sessions" -briefElementDescription "devices"  -testing $true  -log_title_to_display "Connected Devices Report" -display_current_datetime $true -log_to_select_by_date 0 -display_all_messages $true -display_unique_count $true -display_unique_lines $true -display_total_count $true -display_first_and_last_entry $true -date_element_in_entry_array 0 -date_begin_substring_of_element 1 -date_end_substring_of_element 10 -briefoutput $true
-OUTPUT: 
-On 12/16/2016 through  12/16/2017, there were 5 sessions logged, across 2 unique devices.
-
-##################################################################
-
-Displaying brief log output for each day in date range from 365 days ago through today. Remove -testing switch to send results via email
-Parse-LogFile -startday 365 -endday 0  -smtpserver smtp.gmail.com -username user@gmail.com -password "password" -recipient recipient@gmail.com -sender user@gmail.com -subject "Log file for Server" -logpath "C:\Users\Administrator\Downloads\12-10-library" -logname "server*.log" -fieldtofind "authorized by no authentication" -delimiter ' ' -element 9 -substrstart 6 -substrend 17 -briefLinesCounted "sessions" -briefElementDescription "devices"  -testing $true  -log_title_to_display "Connected Devices Report" -display_current_datetime $true -log_to_select_by_date 0 -display_all_messages $true -display_unique_count $true -display_unique_lines $true -display_total_count $true -display_first_and_last_entry $true -date_element_in_entry_array 0 -date_begin_substring_of_element 1 -date_end_substring_of_element 10 -briefexpandedoutput $true
-OUTPUT: 
-Connected Devices Report
-
-Current Date: 12/16/2017 12:58:09
-
-Date Range Selected: 12/16/2016 through 12/16/2017
-
-Brief output expanded to show each day in range: 
-
-On 12/29/2016, there were 1 sessions logged, across 1 unique devices.
-On 11/29/2017, there were 4 sessions logged, across 2 unique devices.
 #>
 
 
@@ -194,16 +139,19 @@ Param(
             [string]$fieldtofind,
  [Parameter(
             HelpMessage="The delimiter to use when searching for unique.")]
-            [string]$delimiter,
+            [string]$delimiter = 0,
  [Parameter(
             HelpMessage="The element of the tokenized log string to select for uniqueness.")]
             [string]$element,
  [Parameter(
             HelpMessage="Used to select start of a substring of Element parameter.")]
-            [string]$SubstrStart = 0,
+            [string]$SubstrStart,
  [Parameter(
             HelpMessage="Used to select stop of a substring of Element parameter.")]
-            [string]$SubstrEnd = -1,
+            [string]$SubstrEnd,
+ [Parameter(
+            HelpMessage="If True this will enable the elements of this script that test and display for uniqueness within the entries.")]
+            [string]$TestUniqueness = $false,
              [Parameter(
             HelpMessage="Display unique log values?.")]
             [string]$display_unique_lines = $false,
@@ -348,9 +296,13 @@ if(!$filenotfound){
     if($briefoutput -eq $true){
         $body = "On $StartDateDisplay" + (&{If(($EndDatedisplay -eq "") -or($startday -eq $endday)) {("")} Else {"$EndDateDisplayforbriefBody"}}) + 
              ", there were" +
-             " $(($selectedlines).count) $briefLinesCounted logged" + 
-             ", across $uniquecount unique $briefElementDescription" +
-             "."
+             " $(($selectedlines).count) $briefLinesCounted logged" 
+             if($TestUniqueness -eq $true){
+                $body += ", across $uniquecount unique $briefElementDescription"
+             }
+             
+             $body += "." + "`r`n"
+                
     }
 
     if($briefexpandedoutput -eq $true){
@@ -358,10 +310,12 @@ if(!$filenotfound){
          foreach($kvp in $log_ht.getenumerator()){
             $body += "On $(([datetime]$kvp.key).toString("MM/dd/yyyy"))" + 
             ", there were" + 
-            " $($kvp.value.count) $briefLinesCounted logged" +
-            ", across $((Get-CountUniqueValuesInLogEntries $kvp.value $delimiter $element $substrstart $substrend).count) unique $briefElementDescription" +
-            "." +
-            "`r`n"
+            " $($kvp.value.count) $briefLinesCounted logged" 
+            if($TestUniqueness -eq $true){
+                $body += ", across $((Get-CountUniqueValuesInLogEntries $kvp.value $delimiter $element $substrstart $substrend).count) unique $briefElementDescription"
+            }
+           
+            $body += "." + "`r`n"
             
             
          } 
