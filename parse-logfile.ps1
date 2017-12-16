@@ -1,10 +1,4 @@
-#If the name of the log changes then this script will need to be modified to get the content of 
-#the desired (most recently modified) file.
-#$logfilename defines the name of the log file
-#$fieldtofind defines the string in the log that desired.
-#User defined variables are located at the top of the script: between the defined funtion
-#and the line "#loop through logfile and add any elements found to $selectedlines array"
-#
+
 #USE: 
 #   open powershell
 #  run . .\parse-logfile.ps1 
@@ -16,12 +10,6 @@
 #AIC - arrayltd.net
 #Powershell 5.
 
-#INPUT:
-#1. A variable containing a file (type is always array) $file
-#2. A delimiter that will tokenize each line of the log $delimiter
-#3. The element of the line to select after it's tokenized into an array $element
-#4. A substring of the element to select. If not provided will use entire element
-#specified in 3. $SubstrStart $SubstrEnd
 
 #hash is for storing key = date, value = array of log entries. Stores them by date for counting later.
 Function BuildHash($hash, $date, $item){
@@ -81,7 +69,7 @@ function Parse-LogFile{
     
    
    Displaying full log output from 365 days ago through today. Remove -testing switch to send results via email
-   Parse-LogFile -startday 700 -endday 0  -smtpserver smtp.gmail.com -username user@gmail.com -password "password" -recipient recipient@gmail.com -sender user@gmail.com -subject "Log file for Server" -logpath "C:\Users\Administrator\Downloads\12-10-library" -logname "server*.log" -fieldtofind "authorized by no authentication" -delimiter ' ' -element 9 -substrstart 6 -substrend 17 -briefLinesCounted "sessions" -briefElementDescription "devices"  -testing $true  -log_title_to_display "Connected Devices Report" -display_current_datetime $true -fulloutput $true -log_to_select_by_date 0 -display_all_messages $true -display_unique_count $true -display_unique_lines $true -display_total_count $true -display_first_and_last_entry $true -date_element_in_entry_array 0 -date_begin_substring_of_element 1 -date_end_substring_of_element 10
+   Parse-LogFile -startday 365 -endday 0  -smtpserver smtp.gmail.com -username user@gmail.com -password "password" -recipient recipient@gmail.com -sender user@gmail.com -subject "Log file for Server" -logpath "C:\Users\Administrator\Downloads\12-10-library" -logname "server*.log" -fieldtofind "authorized by no authentication" -delimiter ' ' -element 9 -substrstart 6 -substrend 17 -briefLinesCounted "sessions" -briefElementDescription "devices"  -testing $true  -log_title_to_display "Connected Devices Report" -display_current_datetime $true -fulloutput $true -log_to_select_by_date 0 -display_all_messages $true -display_unique_count $true -display_unique_lines $true -display_total_count $true -display_first_and_last_entry $true -date_element_in_entry_array 0 -date_begin_substring_of_element 1 -date_end_substring_of_element 10
    
 
 
