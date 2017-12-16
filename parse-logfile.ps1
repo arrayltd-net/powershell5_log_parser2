@@ -114,6 +114,21 @@ Param(
             HelpMessage="Email Subject.")]
             [string]$subject,
 
+ 
+ [Parameter(
+            HelpMessage="The element of the log entry to select for selecting the date")]
+            [int]$date_element_in_entry_array,
+            
+ [Parameter(
+            HelpMessage="Within date_element_in_entry_array, this integer defines the beginning character of the substring to get the date, 
+            Which should be in a form that powershell can convert to a datetime object")]
+            [string]$date_begin_substring_of_element,
+            
+ [Parameter(
+            HelpMessage="This integer is the ending character place of the substring to select the date from the log. Default is empty which will
+            cause the substring to extend to the end of the element")]
+            [string]$date_end_substring_of_element,
+
  [Parameter(
             HelpMessage="SMTP Port.")]
             [string]$smtpport = 587,
@@ -225,8 +240,11 @@ foreach ($line in $logfile){
     if($line.Contains("$fieldtofind")){
         $Date = $line.split(" ")
         
-        $DateInLog = [datetime]$date[0].Substring(1)
-       
+        $DateInLogPosition = $date[$($date_element_in_entry_array)]
+        $DateInLogPosition
+        $DateinLogSubstring = $DateInLogPosition.Substring($($date_begin_substring_of_element),$($date_end_substring_of_element))
+        $DateinLogSubstring
+        $dateinlog = [datetime]$DateinLogSubstring
         $StartDate = ($(get-date).date.adddays(-$StartDay))
        
         
