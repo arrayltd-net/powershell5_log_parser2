@@ -1,0 +1,27 @@
+Connected Devices Report
+
+Current Date: 12/16/2017 12:59:23
+
+Date Range Selected: 12/16/2016 through 12/16/2017
+
+Log file: C:\Users\Administrator\Downloads\12-10-library\server33445 - Copy.log
+
+Total number of filtered entries from log / total entries in log : 5 / 8
+
+Total number of unique filtered entries from log: 2
+
+Most recent Log entry: [2016-12-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:00] is authorized by no authentication
+Oldest Log entry:      [2017-11-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:01] is authorized by no authentication
+
+Unique Messages:
+
+[2016-12-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:00] is authorized by no authentication
+[2017-11-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:01] is authorized by no authentication
+
+All Log Messages:
+
+[2016-12-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:00] is authorized by no authentication
+[2017-11-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:00] is authorized by no authentication
+[2017-11-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:00] is authorized by no authentication
+[2017-11-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:00] is authorized by no authentication
+[2017-11-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[00:00:00:00:00:01] is authorized by no authentication
