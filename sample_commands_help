@@ -21,3 +21,6 @@ briefLinesCounted "sessions"
 -briefElementDescription "devices"
 Specify the nouns you'd prefer.
 The rest of the commands are explained by examining the help text in each parameter in the script.
+
+The string to filter for - only entries with this field will be analyzed.
+-fieldtofind
