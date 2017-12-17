@@ -1,4 +1,5 @@
-This page will group the parameters by functionality
+This page will group the parameters by functionality.
+Also, within the script each parameter has a help description. 
 
 These parameters define the exact element and substring of the element that will be
 analyzed within the string to test uniqueness. If -testuniqueness is false then no data will display or be processed related to 
