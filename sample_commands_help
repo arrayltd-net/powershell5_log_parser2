@@ -1,0 +1,23 @@
+This page will group the parameters by functionality
+
+These parameters define the exact element and substring of the element that will be
+analyzed within the string to test uniqueness. If -testuniqueness is false then no data will display or be processed related to determining the uniqueness of an entry. One example of uniqueness would mac addresses, which can appear in a network log multiple times. However, if you are only interested in unique machines that connected to the network, you would set up these values and set -testuniqueness $true.
+-element 9
+-substrstart 6
+-substrend 17
+-TestUniqueness $true
+These elements define the exact element and substring that provide the log entry's
+date. The result should be able to be cast as a datetime powershell object using
+[datetime] to cast it. 11/20/2017 is an example. You can test it in powershell.
+Powershell's ability to convert strings to datetime objects is very good.
+-date_element_in_entry_array 0
+-date_begin_substring_of_element 1
+-date_end_substring_of_element 10
+When using Briefoutput and Briefextendedoutput, you can customize the output string:
+
+On 12/29/2016, there were 1 sessions logged, across 1 unique devices.
+
+briefLinesCounted "sessions"
+-briefElementDescription "devices"
+Specify the nouns you'd prefer.
+The rest of the commands are explained by examining the help text in each parameter in the script.
