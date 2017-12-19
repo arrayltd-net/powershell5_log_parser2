@@ -20,6 +20,7 @@ Function BuildHash($hash, $date, $item){
 }
 
 function Get-CountUniqueValuesInLogEntries([array]$file, [string]$delimiter, [int]$element, [int]$SubstrStart, [int]$SubstrEnd){
+      
       if($TestUniqueness -eq $true){
            $LogArray =@()
            $LogArrayFullLines = @()
@@ -37,7 +38,9 @@ function Get-CountUniqueValuesInLogEntries([array]$file, [string]$delimiter, [in
             }
       }
 }
+   
    return  $logarrayfulllines
+
       
 }
 
@@ -95,7 +98,7 @@ Param(
             HelpMessage="SMTP Port.")]
             [string]$smtpport = 587,
  [Parameter(Mandatory=$true,
-            HelpMessage="The folder in which the log resides. Example c:\log.  Don't put a final backslash")]
+            HelpMessage="The folder in which the log resides. Example c:\log or c:\log\")]
             [string]$logpath,
  [Parameter(Mandatory=$true,
             HelpMessage="The name of the log. Example: server*.log. Or server.log")]
@@ -176,7 +179,7 @@ $password.ToCharArray() | ForEach-Object {$secstr.AppendChar($_)}
 $cred = new-object -typename System.Management.Automation.PSCredential -argumentlist $username, $secstr
 
 #Select most recent log file.
-$logfilename = (Get-ChildItem -path $logpath\$logname |sort LastWriteTime)[$log_to_select_by_date]
+$logfilename = (Get-ChildItem -path $(Join-Path -Path $logpath -ChildPath $logname) |sort LastWriteTime)[$log_to_select_by_date]
 
 
 #Add each line of the log as a string to a new element of an array
@@ -238,7 +241,8 @@ if(!$filenotfound){
     [string]$EndDateDisplayForBriefBody = " through " + " $EndDateDisplay"
 
     #Get Total number of Unique log entries
-    $uniquelines = Get-CountUniqueValuesInLogEntries $selectedlines $delimiter $element $substrstart $substrend
+    [array]$uniquelines = Get-CountUniqueValuesInLogEntries $selectedlines $delimiter $element $substrstart $substrend
+ 
     $uniquecount = $uniquelines.count
     
     #display log title
