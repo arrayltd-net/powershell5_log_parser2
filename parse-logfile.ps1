@@ -20,24 +20,21 @@ Function BuildHash($hash, $date, $item){
 
 }
 
-
 function Get-CountUniqueValuesInLogEntries([array]$file, [string]$delimiter, [int]$element, [int]$SubstrStart, [int]$SubstrEnd){
       if($TestUniqueness -eq $true){
            $LogArray =@()
            $LogArrayFullLines = @()
                      
-            foreach ($f in $file){
+           foreach ($f in $file){
            
                $tokenize = $f.split($delimiter)
           
-            $linecheck =  $tokenize[$element].substring($substrstart, $substrend)
+               $linecheck =  $tokenize[$element].substring($substrstart, $substrend)
       
-            #put the mac in the array $logarray if it doesn't already exist
-            if ($logarray -notcontains $linecheck){
-                $logarray += $linecheck
-                $LogArrayFullLines += $f   
-          
-          
+               #put the mac in the array $logarray if it doesn't already exist
+               if ($logarray -notcontains $linecheck){
+                  $logarray += $linecheck
+                  $LogArrayFullLines += $f   
             
             }
       
@@ -45,11 +42,7 @@ function Get-CountUniqueValuesInLogEntries([array]$file, [string]$delimiter, [in
 }
    return  $logarrayfulllines
       
-   
-      
-      
 }
-
 
 function Parse-LogFile{
 
@@ -66,8 +59,6 @@ Displaying full log output from 365 days ago through today. Remove -testing swit
 Parse-LogFile -startday 365 -endday 0  -smtpserver smtp.gmail.com -username user@gmail.com -password "password" -recipient recipient@gmail.com -sender user@gmail.com -subject "Log file for Server" -logpath "C:\Users\Administrator\Downloads\12-10-library" -logname "server*.log" -fieldtofind "authorized by no authentication" -delimiter ' ' -briefLinesCounted "sessions" -briefElementDescription "devices"  -testing $true  -log_title_to_display "Connected Devices Report" -display_current_datetime $true -log_to_select_by_date 0 -display_all_messages $true -display_unique_count $true -display_unique_lines $true -display_total_count $true -display_first_and_last_entry $true -date_element_in_entry_array 0 -date_begin_substring_of_element 1 -date_end_substring_of_element 10 -TestUniqueness $true -element 9 -substrstart 6 -substrend 17 -briefexpandedoutput $true 
 
 #>
-
-
 
 Param(
  
@@ -92,34 +83,26 @@ Param(
  [Parameter(Mandatory=$true,
             HelpMessage="Email Subject.")]
             [string]$subject,
-
- 
  [Parameter(
             HelpMessage="The element of the log entry to select for selecting the date")]
             [int]$date_element_in_entry_array,
-            
  [Parameter(
             HelpMessage="Within date_element_in_entry_array, this integer defines the beginning character of the substring to get the date, 
             Which should be in a form that powershell can convert to a datetime object")]
             [string]$date_begin_substring_of_element,
-            
  [Parameter(
             HelpMessage="This integer is the ending character place of the substring to select the date from the log. Default is empty which will
             cause the substring to extend to the end of the element")]
             [string]$date_end_substring_of_element,
-
  [Parameter(
             HelpMessage="SMTP Port.")]
             [string]$smtpport = 587,
-
  [Parameter(Mandatory=$true,
             HelpMessage="The folder in which the log resides")]
             [string]$logpath,
-
  [Parameter(Mandatory=$true,
             HelpMessage="The name of the log. Example: server*.log")]
             [string]$logname,
-
  [Parameter(
             HelpMessage="Display all selected log messages in email body.")]
             [string]$display_all_messages = $true,
@@ -127,7 +110,6 @@ Param(
  [Parameter(
             HelpMessage="Display first and last selected log entries in email body")]
             [string]$display_first_and_last_entry = $true,
-
  [Parameter(
             HelpMessage="Display total count of selected log entries in the email body.")]
             [string]$display_total_count = $true,
@@ -167,7 +149,6 @@ Param(
 [Parameter(
             HelpMessage="When true this will show the brief output fo reach date in the date range")]
             [string]$briefexpandedoutput = $false,
-            
 [Parameter(
             HelpMessage="When using brief output option, this will determine what word goes in place of sessions here: On 12/15/2016, there were 0 sessions logged, across 0 unique devices.")]
             [string]$briefLinesCounted,
@@ -184,21 +165,16 @@ Param(
             HelpMessage="If you want a log in the past, you can specify an integer value. 0 is the current log. 1 is the next oldest log.
             Selecting a number that exceeds the number of available logs -1 you will get an error. Logs are sorted by LastWriteTime")]
             [string]$log_to_select_by_date = 0,
-            
 [Parameter(
             HelpMessage="Set end day to filter on. 0 is today, 1 is yesterday, etc...")]
             [string]$EndDay
-	    	    
 	     
  )
-
-
 
 #Mail Server credential variables
 $secstr = New-Object -TypeName System.Security.SecureString
 $password.ToCharArray() | ForEach-Object {$secstr.AppendChar($_)}
 $cred = new-object -typename System.Management.Automation.PSCredential -argumentlist $username, $secstr
-
 
 #Select most recent log file.
 $logfilename = (Get-ChildItem -path $logpath\$logname |sort LastWriteTime)[$log_to_select_by_date]
@@ -219,7 +195,7 @@ $log_ht = @{}
 #loop through logfile and add any elements found to $selectedlines array
 
 foreach ($line in $logfile){
-    if($line.Contains("$fieldtofind")){
+    if($line -match ("$fieldtofind")){
         $Date = $line.split(" ")
         
         $DateInLogPosition = $date[$($date_element_in_entry_array)]
@@ -228,7 +204,6 @@ foreach ($line in $logfile){
         
         $dateinlog = [datetime]$DateinLogSubstring
         $StartDate = ($(get-date).date.adddays(-$StartDay))
-       
         
         if($endday -ne ""){
             $EndDate = ($(get-date).date.adddays(-$EndDay +1).AddSeconds(-1))
@@ -238,15 +213,11 @@ foreach ($line in $logfile){
             $EndDate = $StartDate
         }
         
-        
         if(($dateinlog -ge $startdate) -and ($dateinlog -le $endDate) ){
            $selectedlines += $line
            $log_ht = buildhash $log_ht $dateinlog $line
-          
-           
 
         } 
-        
    }
 }
 
@@ -302,7 +273,6 @@ if(!$filenotfound){
              }
              
              $body += "." + "`r`n"
-                
     }
 
     if($briefexpandedoutput -eq $true){
@@ -316,17 +286,11 @@ if(!$filenotfound){
             }
            
             $body += "." + "`r`n"
-            
-            
          } 
          $body += "`r`n"
     }
 
-
     if($fulloutput -eq $true){
-
-
-    
         [string]$body += "Log file: " + [string]$logfilename + "`r`n`r`n"
     
 
@@ -367,19 +331,12 @@ if(!$filenotfound){
     }
 }
 
-
-
 #send the email message or output to console
 if($testing -eq $false){
     Send-MailMessage -from $sender -to $recipient -smtpserver $smtpserver -port $smtpport -subject $subject -body $body  -Credential $cred -UseSsl -Verbose
 }
 if($testing -eq $true){
     $body
-
-
-    
-
-  
 }
 
 #cleanup
@@ -390,8 +347,4 @@ $startday = ""
 $endday = ""
 $endDateStr = ""
 $EndDateDisplay = ""
-
-
-
-   
 }
