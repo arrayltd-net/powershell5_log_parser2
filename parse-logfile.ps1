@@ -56,7 +56,7 @@ Displaying full log output from 365 days ago through today. Remove -testing swit
 Parse-LogFile -startday 365 -endday 0  -smtpserver smtp.gmail.com -username user@gmail.com -password "password" -recipient recipient@gmail.com -sender user@gmail.com -subject "Log file for Server" -logpath "C:\Users\Administrator\Downloads\12-10-library" -logname "server*.log" -fieldtofind "authorized by no authentication" -delimiter ' ' -briefLinesCounted "sessions" -briefElementDescription "devices"  -testing $true  -log_title_to_display "Connected Devices Report" -display_current_datetime $true -log_to_select_by_date 0 -display_all_messages $true -display_unique_count $true -display_unique_lines $true -display_total_count $true -display_first_and_last_entry $true -date_element_in_entry_array 0 -date_begin_substring_of_element 1 -date_end_substring_of_element 10 -TestUniqueness $true -element 9 -substrstart 6 -substrend 17 -briefexpandedoutput $true 
 
 #>
-
+[CmdletBinding()]
 Param(
  
  [Parameter(Mandatory=$true,
@@ -95,10 +95,10 @@ Param(
             HelpMessage="SMTP Port.")]
             [string]$smtpport = 587,
  [Parameter(Mandatory=$true,
-            HelpMessage="The folder in which the log resides")]
+            HelpMessage="The folder in which the log resides. Example c:\log.  Don't put a final backslash")]
             [string]$logpath,
  [Parameter(Mandatory=$true,
-            HelpMessage="The name of the log. Example: server*.log")]
+            HelpMessage="The name of the log. Example: server*.log. Or server.log")]
             [string]$logname,
  [Parameter(
             HelpMessage="Display all selected log messages in email body.")]
@@ -114,19 +114,21 @@ Param(
             HelpMessage="Display total count of selected log entries in the email body.")]
             [string]$fulloutput = $false,
  [Parameter(Mandatory=$true,
-            HelpMessage="The string to search for in the log entry.")]
+            HelpMessage="The string to search for in the log entry. Can use regular expressions because script uses -match.")]
             [string]$fieldtofind,
  [Parameter(
             HelpMessage="The delimiter to use when searching for unique.")]
             [string]$delimiter = 0,
  [Parameter(
-            HelpMessage="The element of the tokenized log string to select for uniqueness.")]
+            HelpMessage="A number indicating element of the log string to detect unique entries. To find the element number, assign 
+	    string to a variable a, and the split it with the chosen delimiter using b = a.split(delimiter). Put quotes around the
+	    delimiter.")]
             [string]$element,
  [Parameter(
-            HelpMessage="Used to select start of a substring of Element parameter.")]
+            HelpMessage="Integer used to select start of a substring of element parameter, which is used to test for unique entries.")]
             [string]$SubstrStart,
  [Parameter(
-            HelpMessage="Used to select stop of a substring of Element parameter.")]
+            HelpMessage="Integer used to select stop of a substring of element parameter, which is used to test for unique entries.")]
             [string]$SubstrEnd,
  [Parameter(
             HelpMessage="If True this will enable the elements of this script that test and display for uniqueness within the entries.")]
