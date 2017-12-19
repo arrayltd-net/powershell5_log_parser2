@@ -28,3 +28,7 @@ The rest of the commands are explained by examining the help text in each parame
 
 The string to filter for - only entries with this field will be analyzed.
 -fieldtofind
+The powershell code that searches each line for this text will accept regular expressions and powershell wildcards
+-fieldtofind “authorized by ?? authent”
+
+Will find “authorized by no authentication” and also “authorized by in authentication”, for example
