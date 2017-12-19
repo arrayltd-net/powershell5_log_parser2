@@ -9,7 +9,6 @@
 #  the function Parse-LogFile will be available to run, just supply the parameters required. 
 #  an example of the parameters to supply is below under .EXAMPLES
 
-
 #hash is for storing key = date, value = array of log entries. Stores them by date for counting later.
 Function BuildHash($hash, $date, $item){
 
@@ -35,10 +34,8 @@ function Get-CountUniqueValuesInLogEntries([array]$file, [string]$delimiter, [in
                if ($logarray -notcontains $linecheck){
                   $logarray += $linecheck
                   $LogArrayFullLines += $f   
-            
             }
-      
-        }
+      }
 }
    return  $logarrayfulllines
       
