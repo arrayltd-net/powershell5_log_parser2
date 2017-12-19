@@ -98,7 +98,7 @@ Param(
             HelpMessage="SMTP Port.")]
             [string]$smtpport = 587,
  [Parameter(Mandatory=$true,
-            HelpMessage="The folder in which the log resides. Example c:\log or c:\log\")]
+            HelpMessage="The folder in which the log resides. Example c:\log.  Don't put a final backslash")]
             [string]$logpath,
  [Parameter(Mandatory=$true,
             HelpMessage="The name of the log. Example: server*.log. Or server.log")]
