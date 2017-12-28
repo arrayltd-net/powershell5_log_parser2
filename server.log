@@ -1,0 +1,6 @@
+[2017-11-29 19:36:22,119] <inform-55> INFO  inform - from [dc:9f:db:1a:c5:a2](, U7P, 3.9.3.7537): state=CONNECTED, ext/stun_ip=10.12.14.151, dev_ip=10.12.14.151, up=1455
+[2017-11-29 19:36:34,179] <inform-63> INFO  inform - from [dc:9f:db:1a:c5:a2](, U7P, 3.9.3.7537): state=CONNECTED, ext/stun_ip=10.12.14.151, dev_ip=10.12.14.151, up=1467
+[2017-11-29 19:36:47,246] <inform-97> INFO  inform - from [dc:9f:db:1a:c5:a2](, U7P, 3.9.3.7537): state=CONNECTED, ext/stun_ip=10.12.14.151, dev_ip=10.12.14.151, up=1480
+[2017-11-29 19:36:58,628] <portals-49> INFO  event  - [event] Guest[d0:22:be:fd:76:b5] is authorized by no authentication
+[2017-11-29 19:36:58,650] <portals-49> INFO  guest  - authorize guest[d0:22:be:fd:76:b5] on ap[dc:9f:db:1a:c5:43], url=http://www.google.com/
+[2017-11-29 19:36:59,008] <portals-49> INFO  guest  - authorize guest[d0:22:be:fd:76:b4] on ap[dc:9f:db:1a:c5:43], url=http://www.google.com/
